@@ -5,17 +5,15 @@ import { useState, useMemo, useEffect } from "react";
 export default function AttendanceTracker() {
   const [CLASSES_PER_DAY, setCLASSES_PER_DAY] = useState(8);
   const [TARGET_PERCENT, setTARGET_PERCENT] = useState(65);
-  const [attended, setAttended] = useState(() => {
-    return Number(localStorage.getItem("attended")) || 0;
-  });
+const [attended, setAttended] = useState(0);
+const [total, setTotal] = useState(0);
+const [daysLeft, setDaysLeft] = useState(0);
 
-  const [total, setTotal] = useState(() => {
-    return Number(localStorage.getItem("total")) || 0;
-  });
-
-  const [daysLeft, setDaysLeft] = useState(() => {
-    return Number(localStorage.getItem("daysLeft")) || 0;
-  });
+useEffect(() => {
+  setAttended(Number(localStorage.getItem("attended")) || 0);
+  setTotal(Number(localStorage.getItem("total")) || 0);
+  setDaysLeft(Number(localStorage.getItem("daysLeft")) || 0);
+}, []);
 
   const [todayInput, setTodayInput] = useState(8);
 
