@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+---
 
-## Getting Started
+# Bunk-Tendence
 
-First, run the development server:
+**Bunk-Tendence** is a simple and practical attendance tracker that helps you understand how many classes you need to attend and how many you can safely miss while maintaining a target attendance percentage.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Features
+
+* Real-time attendance percentage calculation
+* Custom target attendance percentage (e.g., 75%)
+* Inputs:
+
+  * Total classes conducted
+  * Classes attended
+* Calculates:
+
+  * Minimum classes required to reach target
+  * Maximum classes you can miss without dropping below target
+  * Equivalent number of days (based on classes per day)
+* Local storage support to persist data
+* Instant updates with a reactive UI
+
+---
+
+## How It Works
+
+Let:
+
+* A = classes attended
+* T = total classes
+* P = target percentage
+
+We solve:
+
+```
+(A + x) / (T + x) >= P
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Where `x` is the number of future classes you must attend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The app computes:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Minimum classes to attend
+* Maximum classes you can miss
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* React / Next.js
+* React Hooks (useState, useMemo, useEffect)
+* localStorage for persistence
+* Minimal UI design
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+git clone https://github.com/constayush/bunk-tendence.git
+cd bunk-tendence
+npm install
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Usage
+
+1. Enter:
+
+   * Total classes conducted
+   * Classes attended
+   * Classes per day
+   * Target attendance percentage
+
+2. The app will display:
+
+   * Current attendance
+   * Classes and days required to reach target
+   * Classes you can miss safely
+
+---
+
+## Example
+
+| Metric        | Value |
+| ------------- | ----- |
+| Total Classes | 193   |
+| Attended      | 101   |
+| Target %      | 65%   |
+
+Output:
+
+* Required classes to attend: X
+* Classes you can miss: Y
+* Equivalent days: Z
+
+---
+
+## Assumptions
+
+* Assumes a constant number of classes per day
+* Does not account for:
+
+  * Holidays
+  * Extra classes
+  * Different weights for lab/theory classes
+* Treats all classes equally
+
+This means results are approximate and may not match all institutional rules.
+
+---
+
+## Future Improvements
+
+* Subject-wise tracking
+* Calendar integration with holidays
+* Attendance trend visualization
+* Backend sync for persistence across devices
+* Predictive suggestions (e.g., impact of future absences)
+
+---
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+---
+
+## License
+
+MIT License
