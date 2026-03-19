@@ -43,9 +43,9 @@ export default function AttendanceTracker() {
 
   // 💾 persist
   useEffect(() => {
-    localStorage.setItem("attended", attended);
-    localStorage.setItem("total", total);
-    localStorage.setItem("daysLeft", daysLeft);
+    localStorage.setItem("attended", String(attended));
+    localStorage.setItem("total", String(total));
+    localStorage.setItem("daysLeft", String(daysLeft));
   }, [attended, total, daysLeft]);
 
   const submitToday = () => {
@@ -211,7 +211,7 @@ export default function AttendanceTracker() {
           value={todayInput}
           min={0}
           max={8}
-          onChange={(e) => setTodayInput(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTodayInput(e.target.value as unknown as number)}
           className="w-full p-2 rounded-lg bg-neutral-800 border border-neutral-700"
         />
       </div>
