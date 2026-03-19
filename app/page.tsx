@@ -118,7 +118,7 @@ export default function AttendanceTracker() {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.75rem" }}>
           <div>
             <p style={{ fontSize: 13, color: "var(--text2)", margin: 0, fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}>
-              Attendance tracker
+              Bunk-Tendance
             </p>
             <h1 style={{ fontSize: 26, fontWeight: 500, margin: "0.15rem 0 0", color: "var(--text)" }}>
               Let's set things up
