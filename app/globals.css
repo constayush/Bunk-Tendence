@@ -24,3 +24,23 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* :root {
+--bg: "#111110",
+  --bg2: "#1c1c1a",
+  --bg3: "#2a2a27",
+  --border: "rgba(255,255,255,0.08)",
+  --text: "#f0ede8",
+  --text2: "#888780",
+  --text3: "#555552",
+} */
+
+/* const LIGHT: React.CSSProperties = {
+  "--bg": "#ffffff",
+  "--bg2": "#f4f3ef",
+  "--bg3": "#eae9e4",
+  "--border": "rgba(0,0,0,0.1)",
+  "--text": "#1a1a18",
+  "--text2": "#666560",
+  "--text3": "#aaa9a4",
+} as React.CSSProperties; */
