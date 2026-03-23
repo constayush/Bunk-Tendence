@@ -369,7 +369,7 @@ export default function AttendanceTracker() {
 
   if (step === "setup") {
     return (
-      <div style={{ ...vars, background: "var(--bg)", minHeight: "100vh", maxWidth: 420, margin: "0 auto", padding: "2rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
+      <div className="min-w-full md:min-w-xl max-h-screen"  style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "2rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
         <style>{`
           @keyframes shake {
             0%,100% { transform: translateX(0); }
@@ -381,10 +381,10 @@ export default function AttendanceTracker() {
         `}</style>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.75rem" }}>
-          <div>
-            <p style={{ fontSize: 13, color: "var(--text2)", margin: 0, fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+          <div className="">
+            <span className="font-black border bg-black px-2 text-[#ff5454]" style={{  letterSpacing: "0.07em", textTransform: "uppercase" }}>
               Bunk-Tendance
-            </p>
+            </span>
             <h1 style={{ fontSize: 26, fontWeight: 500, margin: "0.15rem 0 0", color: "var(--text)" }}>
               Let's set things up
             </h1>
@@ -410,17 +410,17 @@ export default function AttendanceTracker() {
               }} />
           </Field>
 
-          <Field label="Days left in semester" hint="school days remaining" theme={theme}>
+          <Field label="Days left in semester" hint="In how many days do you want to reach your target attendance?" theme={theme}>
             <input type="number" min={0} value={daysLeft || ""} onChange={inp(setDaysLeft)}
               placeholder="0" style={iStyle(theme)} />
           </Field>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-            <Field label="Classes per day" hint="usually 6–8" theme={theme}>
+            <Field label="Classes per day" hint="" theme={theme}>
               <input type="number" min={1} max={20} value={classesPerDay || ""} onChange={inp(setClassesPerDay)}
                 placeholder="8" style={iStyle(theme)} />
             </Field>
-            <Field label="Target %" hint="min to pass" theme={theme}>
+            <Field label="Target %" hint="whats your target attendance?" theme={theme}>
               <input type="number" min={1} max={100} value={targetPercent || ""} onChange={inp(setTargetPercent)}
                 placeholder="75" style={iStyle(theme)} />
             </Field>
@@ -464,17 +464,21 @@ export default function AttendanceTracker() {
   }
 
   return (
-    <div style={{ ...vars, background: "var(--bg)", minHeight: "100vh", maxWidth: 420, margin: "0 auto", padding: "1.5rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
+    <div className="min-w-full md:min-w-xl max-h-screen" style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "1.5rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
-        <p style={{ margin: 0, fontSize: 13, fontWeight: 500, color: "var(--text2)", letterSpacing: "0.05em", textTransform: "uppercase" }}>
-          Attendance
-        </p>
+           <span className="font-black border bg-black px-2 text-[#ff5454]" style={{  letterSpacing: "0.07em", textTransform: "uppercase" }}>
+              Bunk-Tendance
+            </span>
+            
         <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-          <ThemeBtn theme={theme} onToggle={() => setTheme(th => th === "dark" ? "light" : "dark")} />
-          <button onClick={reset} style={{ background: "none", border: "none", fontSize: 12, color: "var(--text3)", cursor: "pointer", padding: "4px 8px" }}>
-            Reset
-          </button>
+         
+          <button onClick={() => setStep("setup")} className="border bg-black rounded-xl px-2 py-1 m-1" style={{
+   
+        fontSize: 13, cursor: "pointer"
+      }}>
+        ← Edit entries
+      </button> <ThemeBtn theme={theme} onToggle={() => setTheme(th => th === "dark" ? "light" : "dark")} />
         </div>
       </div>
 
@@ -562,12 +566,7 @@ export default function AttendanceTracker() {
         </button>
       </div>
 
-      <button onClick={() => setStep("setup")} style={{
-        marginTop: "1rem", background: "none", border: "none",
-        fontSize: 13, color: "var(--text3)", cursor: "pointer", padding: "4px 0"
-      }}>
-        ← Edit settings
-      </button>
+  
     </div>
   );
 }
