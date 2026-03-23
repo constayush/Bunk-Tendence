@@ -369,7 +369,7 @@ export default function AttendanceTracker() {
 
   if (step === "setup") {
     return (
-      <div className="min-w-full md:min-w-xl max-h-screen"  style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "2rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
+      <div className="min-w-full md:min-w-xl min-h-screen"  style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "2rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
         <style>{`
           @keyframes shake {
             0%,100% { transform: translateX(0); }
@@ -464,7 +464,7 @@ export default function AttendanceTracker() {
   }
 
   return (
-    <div className="min-w-full md:min-w-xl max-h-screen" style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "1.5rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
+    <div className="min-w-full md:min-w-xl min-h-screen" style={{ ...vars, background: "var(--bg)",  margin: "0 auto", padding: "1.5rem 1rem", fontFamily: "system-ui, sans-serif", transition: "background 0.2s" }}>
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
            <span className="font-black border bg-black px-2 text-[#ff5454]" style={{  letterSpacing: "0.07em", textTransform: "uppercase" }}>
