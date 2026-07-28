@@ -149,18 +149,32 @@ export default function AttendanceTracker() {
     if (daysLeft <= 0) return;
     const a = Math.min(Math.max(Number(todayInput), 0), classesPerDay);
     const today = todayStr();
+    const existing = logs.find((l) => l.date === today);
+    if (existing) {
+      setAttended((x) => x - existing.attended + a);
+    } else {
+      setAttended((x) => x + a);
+      setTotal((x) => x + classesPerDay);
+    }
     setLogs((prev) => {
-      const existing = prev.findIndex((l) => l.date === today);
-      if (existing >= 0) {
+      const idx = prev.findIndex((l) => l.date === today);
+      if (idx >= 0) {
         const next = [...prev];
-        next[existing] = { date: today, attended: a, total: classesPerDay };
+        next[idx] = { date: today, attended: a, total: classesPerDay };
         return next;
       }
       return [...prev, { date: today, attended: a, total: classesPerDay }];
     });
-    setAttended((x) => x + a);
-    setTotal((x) => x + classesPerDay);
     setTodayInput(classesPerDay);
+  };
+
+  const removeToday = () => {
+    const today = todayStr();
+    const existing = logs.find((l) => l.date === today);
+    if (!existing) return;
+    setAttended((x) => x - existing.attended);
+    setTotal((x) => x - existing.total);
+    setLogs((prev) => prev.filter((l) => l.date !== today));
   };
 
   const clearData = () => {
@@ -225,7 +239,6 @@ export default function AttendanceTracker() {
         <DashboardView
           theme={theme}
           onToggleTheme={toggleTheme}
-          onEdit={() => setStep("setup")}
           onClearData={clearData}
           stats={stats}
           status={status}
@@ -234,9 +247,38 @@ export default function AttendanceTracker() {
           classesPerDay={classesPerDay}
           attended={attended}
           total={total}
+          endDate={endDate}
           todayInput={todayInput}
           onTodayInputChange={setTodayInput}
           onSubmitToday={submitToday}
+          onRemoveToday={removeToday}
+          logs={logs}
+          onTargetPercentChange={(n) => {
+            setTargetPercent(n);
+            setTotalError(null);
+          }}
+          onClassesPerDayChange={(n) => {
+            setClassesPerDay(n);
+            setTodayInput(n);
+          }}
+          onEndDateChange={(v) => setEndDate(v)}
+          onAttendedChange={(n) => {
+            setAttended(n);
+            if (total > 0 && n > total) {
+              setAttendedError(`Can't be more than ${total}`);
+            } else {
+              setAttendedError(null);
+            }
+          }}
+          onTotalChange={(n) => {
+            setTotal(n);
+            setTotalError(n < 0 ? "Can't be negative" : null);
+            if (attended > n && n > 0) {
+              setAttendedError(`Can't be more than ${n}`);
+            } else {
+              setAttendedError(null);
+            }
+          }}
         />
       )}
     </div>
